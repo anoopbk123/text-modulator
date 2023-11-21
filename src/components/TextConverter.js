@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 
 export default function TextConverter(props) {
+  
   const [text, setText] = useState("");
 
   const handleUpperClick = () => {
     const UpperCase = text.toUpperCase();
     setText(UpperCase);
+    props.setAlertMsg('Converted to UpperCase', 'success')
   };
 
   const handleLower = () => {
     const lowerCaseLetters = text.toLowerCase();
     setText(lowerCaseLetters);
+    props.setAlertMsg('Converted to LowerCase', 'success')
   };
 
   const handleChange = (event) => {
@@ -18,7 +21,8 @@ export default function TextConverter(props) {
   };
 
   const handleClear = () => {
-    setText("")
+    setText("");
+    props.setAlertMsg('Cleared', 'success')
   }
 
   const wordArray = text.trim() ? text.split(/\s+/)  : [];
