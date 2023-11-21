@@ -7,7 +7,12 @@ export default function TextConverter(props) {
   const handleUpperClick = () => {
     const UpperCase = text.toUpperCase();
     setText(UpperCase);
-    props.setAlertMsg('Converted to UpperCase', 'success')
+    if(text.trim()){
+      props.setAlertMsg('Converted to UpperCase', 'success')
+    }
+    else{
+      props.setAlertMsg('Please enter text', 'Error')
+    }
   };
 
   const handleLower = () => {
