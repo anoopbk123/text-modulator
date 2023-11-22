@@ -2,7 +2,16 @@ import React, { useState } from "react";
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function TextConverter(props) {
+
+  
+
+  
+
   const [text, setText] = useState("");
+
+  const handleChange = (event) => {
+    setText(event.target.value);
+  };
 
   //validating is string empty
   const validateText = (msg) => {
@@ -13,7 +22,11 @@ export default function TextConverter(props) {
     }
   };
 
+  const [pasteAnime, setpasteAnime] = useState("fa-regular fa-paste");
+
   const handlePaste = ()=>{
+    setpasteAnime("fa-regular fa-paste fa-beat");
+    setTimeout(()=>setpasteAnime("fa-regular fa-paste"),1000);
     if (navigator.clipboard){
       navigator.clipboard.readText()
       .then(text =>{
@@ -36,10 +49,6 @@ export default function TextConverter(props) {
     const lowerCaseLetters = text.toLowerCase();
     setText(lowerCaseLetters);
     validateText("Converted to LowerCase");
-  };
-
-  const handleChange = (event) => {
-    setText(event.target.value);
   };
 
   const handleCamel = () => {
@@ -87,7 +96,10 @@ export default function TextConverter(props) {
     props.setAlertMsg("Cleared", "success");
   };
 
+  const [copyAnime, setCopyAnime] = useState("fa-regular fa-copy")
   const handleCopy = () => {
+    setCopyAnime("fa-regular fa-copy fa-bounce");
+    setTimeout(()=>setCopyAnime("fa-regular fa-copy"),1000);
     navigator.clipboard.writeText(text);
     validateText("Text copied");
     setText("");
@@ -110,30 +122,30 @@ export default function TextConverter(props) {
 
         <button
             onClick={handlePaste}
-            className="btn btn-primary my-1 mx-2"
+            className="btn btn-info my-1 mx-2"
           >
-            {/* <FontAwesomeIcon icon="fa-regular fa-clipboard" bounce style={{color: "#ffffff",}} />  */}
-            Paste
+          {/* <FontAwesomeIcon icon="fa-regular fa-clipboard" bounce style={{color: "#ffffff",}} />  */}
+          <i className={pasteAnime}></i> Paste
           </button>
 
           <button
             onClick={handleUpperClick}
             className="btn btn-primary my-1 mx-2"
           >
-            Convert to Uppercase
+            CONVERT TO UPPER CASE
           </button>
           <button onClick={handleLower} className="btn btn-primary my-1 mx-2">
-            Convert to Lowercase
+            convert to lowercase
           </button>
           <button onClick={handleCamel} className="btn btn-primary my-1 mx-2">
-            Convert to Camelcase
+            Convert To Camelcase
           </button>
 
           <button
             onClick={handleSentanceCase}
             className="btn btn-primary my-1 mx-2"
           >
-            Convert to Sentancecase
+            Convert to sentancecase
           </button>
 
           <button
@@ -173,8 +185,8 @@ export default function TextConverter(props) {
             rows="3"
             readOnly
           ></textarea>
-          <button onClick={handleCopy} className="btn btn-primary my-1 mx-2">
-            <i className="fa fa-copy"></i> Copy
+          <button onClick={handleCopy} className="btn btn-success my-1 mx-2">
+          <i className={copyAnime}></i>  Copy
           </button>
         </p>
       </div>
