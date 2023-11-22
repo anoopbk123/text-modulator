@@ -21,8 +21,8 @@ function App() {
     <>
       <Navbar title = "Text Modulator" about = "about" />
       <Alert alert={alert}/>
-      <About/>
-      {/* <TextConverter setAlertMsg={setAlertMsg} heading="Enter your Text here" /> */}
+      {/* <About/> */}
+      <TextConverter setAlertMsg={setAlertMsg} heading="Enter your Text here" />
     </>
   );
 }
