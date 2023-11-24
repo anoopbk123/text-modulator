@@ -1,29 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
-import Navbar from './components/Navbar';
-import TextConverter from './components/TextConverter';
-import Alert from './components/Alert';
-import { useState } from 'react';
-import About from './components/About';
+import logo from "./logo.svg";
+import "./App.css";
+import Navbar from "./components/Navbar";
+import TextConverter from "./components/TextConverter";
+import Alert from "./components/Alert";
+import React, { useState } from "react";
+import About from "./components/About";
+import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
 
 function App() {
   const [alert, setAlert] = useState(null);
 
-  const setAlertMsg = (message, type)=>{
+  const setAlertMsg = (message, type) => {
     setAlert({
       msg: message,
-      type: type
+      type: type,
     });
-    setTimeout(()=>{setAlert(null)}, 3000);
-  }
-  
+    setTimeout(() => {
+      setAlert(null);
+    }, 3000);
+  };
+
   return (
-    <>
-      <Navbar title = "Text Modulator" about = "about" />
-      <Alert alert={alert}/>
-      {/* <About/> */}
-      <TextConverter setAlertMsg={setAlertMsg} heading="Enter your Text here" />
-    </>
+    <BrowserRouter>
+      <>
+        <Navbar title="Text Modulator" about="about" />
+        <Alert alert={alert} />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <TextConverter
+                setAlertMsg={setAlertMsg}
+                heading="Enter your Text here"
+              />
+            }
+          />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </>
+    </BrowserRouter>
   );
 }
 
