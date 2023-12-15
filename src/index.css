@@ -14,3 +14,8 @@ code {
 #textarea-preview{
   background-color: rgb(241, 240, 231);
 }
+.alert{
+  position: fixed;
+  top:0;
+  width: 100%;
+}

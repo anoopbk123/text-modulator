@@ -2,11 +2,6 @@ import React, { useState } from "react";
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function TextConverter(props) {
-
-  
-
-  
-
   const [text, setText] = useState("");
 
   const handleChange = (event) => {
@@ -24,20 +19,25 @@ export default function TextConverter(props) {
 
   const [pasteAnime, setpasteAnime] = useState("fa-regular fa-paste");
 
-  const handlePaste = ()=>{
+  const handlePaste = () => {
     setpasteAnime("fa-regular fa-paste fa-beat");
-    setTimeout(()=>setpasteAnime("fa-regular fa-paste"),1000);
-    if (navigator.clipboard){
-      navigator.clipboard.readText()
-      .then(text =>{
-        setText(text);
-      })
-      .catch(err => {
-        props.setAlertMsg(err.message, "error")
-      })
+    setTimeout(() => setpasteAnime("fa-regular fa-paste"), 1000);
+    if (navigator.clipboard) {
+      navigator.clipboard
+        .readText()
+        .then((text) => {
+          if (text.trim() !== "") {
+            setText(text);
+            props.setAlertMsg("Text pasted", "success");
+          } else {
+            props.setAlertMsg("Nothing to paste", "warning");
+          }
+        })
+        .catch((err) => {
+          props.setAlertMsg(err.message, "error");
+        });
     }
-    
-  }
+  };
 
   const handleUpperClick = () => {
     const UpperCase = text.toUpperCase();
@@ -62,11 +62,11 @@ export default function TextConverter(props) {
         }
       }
       setText(camelCase);
-    } 
+    }
     validateText("Converted to CamelCase");
   };
 
-  const handleSentanceCase = ()=>{
+  const handleSentanceCase = () => {
     if (text.length > 0) {
       let sentanceCase = text[0].toUpperCase();
       for (let i = 1; i < text.length - 1; i++) {
@@ -77,9 +77,9 @@ export default function TextConverter(props) {
         }
       }
       setText(sentanceCase);
-    } 
+    }
     validateText("Converted to Sentance Case");
-  }
+  };
 
   const handleWhiteSpace = () => {
     setText(wordArray.join(" "));
@@ -89,17 +89,17 @@ export default function TextConverter(props) {
   const handleReverse = () => {
     setText([...wordArray].reverse().join(" "));
     validateText("Text reversed");
-  }
+  };
 
   const handleClear = () => {
     setText("");
     props.setAlertMsg("Cleared", "success");
   };
 
-  const [copyAnime, setCopyAnime] = useState("fa-regular fa-copy")
+  const [copyAnime, setCopyAnime] = useState("fa-regular fa-copy");
   const handleCopy = () => {
     setCopyAnime("fa-regular fa-copy fa-bounce");
-    setTimeout(()=>setCopyAnime("fa-regular fa-copy"),1000);
+    setTimeout(() => setCopyAnime("fa-regular fa-copy"), 1000);
     navigator.clipboard.writeText(text);
     validateText("Text copied");
     setText("");
@@ -109,7 +109,7 @@ export default function TextConverter(props) {
 
   return (
     <>
-      <div className="mb-3 my-5 mx-3">
+      <div className="mb-3 my-2 mx-3">
         <h2>{props.heading}</h2>
         <textarea
           className="form-control"
@@ -119,13 +119,9 @@ export default function TextConverter(props) {
           rows="3"
         ></textarea>
         <div className="my-2 ">
-
-        <button
-            onClick={handlePaste}
-            className="btn btn-info my-1 mx-2"
-          >
-          {/* <FontAwesomeIcon icon="fa-regular fa-clipboard" bounce style={{color: "#ffffff",}} />  */}
-          <i className={pasteAnime}></i> Paste
+          <button onClick={handlePaste} className="btn btn-info my-1 mx-2">
+            {/* <FontAwesomeIcon icon="fa-regular fa-clipboard" bounce style={{color: "#ffffff",}} />  */}
+            <i className={pasteAnime}></i> Paste
           </button>
 
           <button
@@ -155,13 +151,10 @@ export default function TextConverter(props) {
             Remove extra white space
           </button>
 
-          <button
-            onClick={handleReverse}
-            className="btn btn-primary my-1 mx-2"
-          >
+          <button onClick={handleReverse} className="btn btn-primary my-1 mx-2">
             Reverse text
           </button>
-          
+
           <button onClick={handleClear} className="btn btn-danger my-1 mx-2">
             Clear
           </button>
@@ -186,7 +179,7 @@ export default function TextConverter(props) {
             readOnly
           ></textarea>
           <button onClick={handleCopy} className="btn btn-success my-1 mx-2">
-          <i className={copyAnime}></i>  Copy
+            <i className={copyAnime}></i> Copy
           </button>
         </p>
       </div>

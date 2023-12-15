@@ -1,0 +1,5 @@
+create a use state with initial object darkmode with color and back ground
+send darkmode and setDarkmode as props to navbar
+set a button for darkmode
+onclick props.setdarkmode(darkmode style) if props.darkmode.color="white"
+send darkmode as props to other components
