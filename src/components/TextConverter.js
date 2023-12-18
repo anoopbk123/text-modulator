@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function TextConverter(props) {
   const [text, setText] = useState("");
@@ -55,7 +54,7 @@ export default function TextConverter(props) {
     if (text.length > 0) {
       let camelCase = text[0].toUpperCase();
       for (let i = 1; i < text.length - 1; i++) {
-        if (text[i - 1] == " ") {
+        if (text[i - 1] === " ") {
           camelCase += text[i].toUpperCase();
         } else {
           camelCase += text[i].toLowerCase();
@@ -70,7 +69,7 @@ export default function TextConverter(props) {
     if (text.length > 0) {
       let sentanceCase = text[0].toUpperCase();
       for (let i = 1; i < text.length - 1; i++) {
-        if (text[i - 1] == " " && text[i - 2] == ".") {
+        if (text[i - 1] === " " && text[i - 2] === ".") {
           sentanceCase += text[i].toUpperCase();
         } else {
           sentanceCase += text[i].toLowerCase();

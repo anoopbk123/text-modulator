@@ -1,11 +1,10 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import TextConverter from "./components/TextConverter";
 import Alert from "./components/Alert";
 import React, { useState } from "react";
 import About from "./components/About";
-import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   const [alert, setAlert] = useState(null);

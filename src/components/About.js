@@ -18,7 +18,7 @@ export default function About() {
     
 
     const handleMode = (event) =>{
-        if(mode.color == 'black'){
+        if(mode.color === 'black'){
             setMode({
                 color: "white",
                 backgroundColor:"black"
